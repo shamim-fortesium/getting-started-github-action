@@ -22,3 +22,12 @@ jobs:
 
      - name: Build with dotnet
        run: dotnet build --configuration Release -no-restore
+
+    - name: publish app
+       run: dotnet publish --configuration Release -o ./out
+
+    - name: deploy to azure webapp
+      uses: azure/webapps-deploy@v2
+      with:
+       app-name: github-fortesium
+       publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3695FD5BBF9C4EA9A180472F3B4DE89E }}
